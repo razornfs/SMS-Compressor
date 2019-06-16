@@ -1,21 +1,26 @@
 import org.apache.commons.lang3.StringUtils;
+import picocli.CommandLine;
+import picocli.CommandLine.Option;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
-public class Main {
+public class Main implements Runnable {
+
+    @Option(names = "-m", required = true)
+    private static String SMS = "Ala ma kota";
+
+    @Option(names = "-d", required = true)
+    private static int length = 160;
+
+    @Option(names = "-k", required = true)
+    private static BigDecimal cost = BigDecimal.valueOf(1);
+
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("=== Kompresja SMS ===");
-        System.out.println("Podaj treść SMSa:");
-        String SMS = sc.nextLine();
-        System.out.println("Podaj maksymalną długość SMSa: ");
-        int length = sc.nextInt();
-        System.out.println("Podaj koszt wysłania jednego SMSa w złotych: ");
-        BigDecimal cost = sc.nextBigDecimal();
+        CommandLine.run(new Main(), args);
+    }
 
+    public void run() {
         JsmazCompressor nc = new JsmazCompressor();
         byte[] compressed = nc.compress(SMS);
 
