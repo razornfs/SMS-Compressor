@@ -1,5 +1,5 @@
-public interface Compressor {
-    String compress(String text);
+public interface Compressor<T> {
+    T compress(String text);
 
-    String decompress(String text);
+    String decompress(T text);
 }

@@ -1,4 +1,7 @@
+import org.apache.commons.lang3.StringUtils;
+
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,11 +16,11 @@ public class Main {
         System.out.println("Podaj koszt wysłania jednego SMSa w złotych: ");
         BigDecimal cost = sc.nextBigDecimal();
 
-        NaiveCompressor nc = new NaiveCompressor();
-        String compressed = nc.compress(SMS);
+        JsmazCompressor nc = new JsmazCompressor();
+        byte[] compressed = nc.compress(SMS);
 
         Paginator paginator = new Paginator(length);
-        List<String> paginate = paginator.paginate(compressed);
+        List<String> paginate = paginator.paginate(StringUtils.join(compressed, ""));
         int amountOfSMS = paginate.size();
 
         CostCalculator calculator = new CostCalculator(cost);

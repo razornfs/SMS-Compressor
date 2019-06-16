@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class NaiveCompressor implements Compressor {
+public class NaiveCompressor implements Compressor<String> {
     public String compress(String text) {
         String[] words = text.split("\\s+");
         for (int i = 0; i < words.length; i++) {
